@@ -12,8 +12,8 @@ require 'pp'
 
 
 ### 3rd party gems
-require 'sinatra/base'    # note: use "modular" sinatra app / service
-
+require 'sinatra/base'                         # note: use "modular" sinatra app / service
+require 'blockchain-lite/proof_of_work/block'  # note: use proof-of-work block only (for now)
 
 
 ### our own code
@@ -58,6 +58,10 @@ set :static, true # set up static file routing  -- check - still needed?
 
 set connections: []
 
+
+get '/style.css' do
+  scss :style    ## note: converts (pre-processes) style.scss to style.css
+end
 
 
 get '/' do

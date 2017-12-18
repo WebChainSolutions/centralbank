@@ -1,24 +1,29 @@
+
 body {
-  background: #fff;
-  font-family: 'menlo', monospace;
-  color: #2B2D2F;
   padding: 0;
   margin: 0;
-  font-size: 14px;
   min-width: 960px;
+
+  font-family: 'menlo', monospace;
+  font-size: 14px;
+
+  background: #fff;
+  color: #2B2D2F;
 }
+
 
 .columns {
   display: flex;
+
+  .left {
+    width: 66%;
+  }
+
+  .right {
+    width: 34%;
+  }
 }
 
-.left {
-  width: 66%;
-}
-
-.right {
-  width: 34%;
-}
 
 h1 {
   font-size: 24px;
@@ -26,6 +31,7 @@ h1 {
   padding-left: 15px;
   margin-bottom: 20px;
 }
+
 
 h2 {
   font-size: 16px;
@@ -55,16 +61,17 @@ input[type=text] {
 table {
   border-spacing: 0;
   border-collapse: collapse;
+
+  th {
+    text-align: left;
+  }
+
+  td {
+    vertical-align: top;
+    padding: 5px 15px 5px 0;
+  }
 }
 
-th {
-  text-align: left;
-}
-
-td {
-  vertical-align: top;
-  padding: 5px 15px 5px 0;
-}
 
 ul {
   list-style: none;
@@ -87,77 +94,79 @@ input[type=submit].small {
   padding: 4px 10px;
 }
 
-.wallet,
-.pending-transactions,
-.peers,
-.ledger,
-.blockchain {
-  padding: 15px;
-}
+
 
 .wallet {
+  padding: 15px;
   background: #7FDBFF;
+
+  h2 {
+   margin-bottom: 0;
+ }
+
+  .balance {
+   font-size: 30px;
+  }
 }
 
-.wallet h2 {
-  margin-bottom: 0;
-}
-
-.balance {
-  font-size: 30px;
-}
 
 .pending-transactions {
+  padding: 15px;
   background: #A3E6FF;
 }
 
 .peers {
+  padding: 15px;
   background: #C6EFFF;
+
+  li form {
+    display: inline;
+  }
+
+  li {
+    padding: 5px 0px;
+  }
 }
 
-.peers li form {
-  display: inline;
-}
 
 .ledger {
+  padding: 15px;
   background: #E3F7FF;
 }
 
+
 .blockchain {
+  padding: 15px;
   position: relative;
   background: #001F3F;
   color: #fff;
-}
 
-.blockchain form {
-  position: absolute;
-  top: 30px;
-  right: 15px;
-}
+  form {
+    position: absolute;
+    top: 30px;
+    right: 15px;
+  }
 
-.blocks {
-  border: 1px solid #597898;
-  border-bottom: 0;
-}
+  .blocks {
+    border: 1px solid #597898;
+    border-bottom: 0;
 
-.block {
-  margin: 0;
-  border-bottom: 2px dashed #597898;
-  padding: 10px;
-}
+     .block {
+      margin: 0;
+      border-bottom: 2px dashed #597898;
+      padding: 10px;
 
-.block .header {
-  text-align: center;
-  padding: 0 8px 8px 8px;
-  color: #597898;
-  border-bottom: 1px solid #354c63;
-  margin-bottom: 10px;
-}
+      .header {
+        text-align: center;
+        padding: 0 8px 8px 8px;
+        color: #597898;
+        border-bottom: 1px solid #354c63;
+        margin-bottom: 10px;
+      }
 
-.block .id {
-  color: #597898;
-}
-
-.peers li {
-  padding: 5px 0px;
+      .id {
+        color: #597898;
+      }
+    }
+  }
 }

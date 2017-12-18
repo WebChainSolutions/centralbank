@@ -11,6 +11,11 @@ Gemfile
 Gemfile.lock
 
 
+####
+#  ignore sass cache
+.sass-cache
+
+
 
 *.gem
 *.rbc
