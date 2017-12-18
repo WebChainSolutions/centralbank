@@ -22,6 +22,8 @@ Next install all dependencies using bundler with a Gemfile e.g.:
 source "https://rubygems.org"
 
 gem 'sinatra'
+gem 'sass'
+gem 'blockchain-lite'
 ```
 
 run
