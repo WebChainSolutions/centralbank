@@ -1,7 +1,9 @@
 HISTORY.md
+LICENSE.md
 Manifest.txt
 README.md
 Rakefile
+bin/centralbank
 lib/centralbank.rb
 lib/centralbank/bank.rb
 lib/centralbank/block.rb
@@ -9,6 +11,9 @@ lib/centralbank/blockchain.rb
 lib/centralbank/cache.rb
 lib/centralbank/ledger.rb
 lib/centralbank/node.rb
+lib/centralbank/pool.rb
+lib/centralbank/service.rb
+lib/centralbank/tool.rb
 lib/centralbank/transaction.rb
 lib/centralbank/version.rb
 lib/centralbank/views/_blockchain.erb

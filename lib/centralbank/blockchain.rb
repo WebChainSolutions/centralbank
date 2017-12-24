@@ -3,7 +3,7 @@
 
 class Blockchain
   extend Forwardable
-  def_delegators :@chain, :[], :size, :each, :empty?, :last
+  def_delegators :@chain, :[], :size, :each, :empty?, :any?, :last
 
 
   def initialize( chain=[] )

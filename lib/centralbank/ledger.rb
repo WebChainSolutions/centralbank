@@ -10,7 +10,7 @@ class Ledger
   end
 
   def sufficient_funds?( wallet, amount )
-    return true   if wallet == Bank::COINBASE   ### use Config::COINBASE why? why not ???
+    return true   if wallet == Centralbank.config.coinbase
     @wallets.has_key?( wallet ) && @wallets[wallet] - amount >= 0
   end
 
@@ -20,7 +20,7 @@ private
   def apply_transactions( transactions )
     transactions.each do |tx|
       if sufficient_funds?(tx.from, tx.amount)
-        @wallets[tx.from] -= tx.amount   unless tx.from == Bank::COINBASE   ### use Config::COINBASE why? why not ???
+        @wallets[tx.from] -= tx.amount   unless tx.from == Centralbank.config.coinbase
         @wallets[tx.to] ||= 0
         @wallets[tx.to] += tx.amount
       end

@@ -3,13 +3,7 @@
 class Node
   attr_reader :id, :peers, :wallet, :bank
 
-
-  WALLET_ADDRESSES = %w[Sepp Franz Sissi Maria Eva Ferdl Max Adam]
-
-  def initialize( address: nil )
-    ## pick "random" address if nil (none passed in)
-    address ||= WALLET_ADDRESSES[rand( WALLET_ADDRESSES.size )]
-
+  def initialize( address: )
     @id     = SecureRandom.uuid
     @peers  = []
     @wallet = Wallet.new( address )

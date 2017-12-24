@@ -1,28 +1,27 @@
 
 
-
-
 class Bank
   attr_reader :pending, :chain, :ledger
-
-  COINBASE      = "COINBASE"
-  MINING_REWARD = 5
 
 
   def initialize( address )
     @address = address
 
-    @cache = Cache.new( 'data.json' )
+    ## note: add address name for now to cache
+    ##          allows to start more nodes in same folder / directory
+    @cache = Cache.new( "data.#{address.downcase}.json" )
     h = @cache.read
     if h
       ## restore blockchain
       @chain = Blockchain.from_json( h['chain'] )
-      ## restore pending transactions too
-      @pending = h['transactions'].map { |h_tx| Tx.from_h( h_tx ) }
+      ## restore pending (unconfirmed) transactions pool too
+      @pending = Pool.from_json( h['transactions'] )
     else
       @chain   = Blockchain.new
-      @chain  << [Tx.new( COINBASE, @address, MINING_REWARD )]    # genesis (big bang!) starter block
-      @pending = []
+      @chain  << [Tx.new( Centralbank.config.coinbase,
+                          @address,
+                          Centralbank.config.mining_reward )]    # genesis (big bang!) starter block
+      @pending = Pool.new
     end
 
     ## update ledger (balances) with confirmed transactions
@@ -32,11 +31,13 @@ class Bank
 
 
   def mine_block!
-    add_transaction( Tx.new( COINBASE, @address, MINING_REWARD ))
+    add_transaction( Tx.new( Centralbank.config.coinbase,
+                             @address,
+                             Centralbank.config.mining_reward ))
 
     ## add mined (w/ computed/calculated hash) block
-    @chain << @pending
-    @pending = []
+    @chain << @pending.transactions
+    @pending = Pool.new   ## clear out/ empty pool (just create a new one for now)
 
     ## update ledger (balances) with new confirmed transactions
     @ledger = Ledger.new( @chain )
@@ -76,13 +77,8 @@ class Bank
       ## update ledger (balances) with new confirmed transactions
       @ledger = Ledger.new( @chain )
 
-
-      _transactions = @chain.transactions   ## use a copy for reference (optimization) in inner loop
-      ## todo: cleanup ???  -- use tx2 for t ???
-      ##   document - keep only pending transaction not yet in blockchain ????
-      @pending = @pending.select do |tx|
-        _transactions.none? { |tx_confirmed| tx_confirmed.id == tx.id }
-      end
+      ## document - keep only pending transaction not  yet (confirmed) in (new) blockchain ????
+      @pending.update!( @chain.transactions )
       @cache.write as_json
       return true
     else
@@ -94,7 +90,7 @@ class Bank
 
   def as_json
     { chain:        @chain.as_json,
-      transactions: @pending.map { |tx| tx.to_h }
+      transactions: @pending.as_json
     }
   end
 
@@ -107,7 +103,7 @@ private
 
     ## todo: use chain.include?  to check for include
     ##   avoid loop and create new array for check!!!
-    (@chain.transactions + @pending).none? { |tx| tx_new.id == tx.id }
+    (@chain.transactions + @pending.transactions).none? { |tx| tx_new.id == tx.id }
   end
 
 end  ## class Bank

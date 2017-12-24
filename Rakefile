@@ -20,7 +20,7 @@ Hoe.spec 'centralbank' do
   self.extra_deps = [
     ['sinatra', '>=2.0'],
     ['sass'],   ## used for css style preprocessing (scss)
-    ['blockchain-lite', '>=1.2'],
+    ['blockchain-lite', '>=1.3.1'],
   ]
 
   self.licenses = ['Public Domain']

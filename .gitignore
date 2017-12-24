@@ -2,6 +2,8 @@
 #  cached / saved state / data
 
 data.json
+data.*.json
+
 
 
 ##########
