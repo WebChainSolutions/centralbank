@@ -18,7 +18,7 @@ class Bank
       @pending = Pool.from_json( h['transactions'] )
     else
       @chain   = Blockchain.new
-      @chain  << [Tx.new( Centralbank.config.coinbase,
+      @chain  << [Tx.new( Centralbank.config.rand_coinbase,
                           @address,
                           Centralbank.config.mining_reward )]    # genesis (big bang!) starter block
       @pending = Pool.new
@@ -31,7 +31,7 @@ class Bank
 
 
   def mine_block!
-    add_transaction( Tx.new( Centralbank.config.coinbase,
+    add_transaction( Tx.new( Centralbank.config.rand_coinbase,
                              @address,
                              Centralbank.config.mining_reward ))
 

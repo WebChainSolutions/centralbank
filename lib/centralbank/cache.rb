@@ -6,14 +6,14 @@ class Cache
   end
 
   def write( data )
-    File.open( @name, 'w' ) do |f|        ## use utf8 - why? why not??
+    File.open( @name, 'w:utf-8' ) do |f|
       f.write JSON.pretty_generate( data )
     end
   end
 
   def read
     if File.exists?( @name )
-      data = File.read( @name )   ## use utf8 - why? why not??
+      data = File.open( @name, 'r:bom|utf-8' ).read
       JSON.parse( data )
     else
       nil

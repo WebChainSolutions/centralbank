@@ -12,9 +12,6 @@ module Centralbank
   PUBLIC_FOLDER = "#{Centralbank.root}/lib/centralbank/public"
   VIEWS_FOLDER  = "#{Centralbank.root}/lib/centralbank/views"
 
-  puts "[centralbank] boot - setting public folder to: #{PUBLIC_FOLDER}"
-  puts "[centralbank] boot - setting views folder to: #{VIEWS_FOLDER}"
-
   set :public_folder, PUBLIC_FOLDER # set up the static dir (with images/js/css inside)
   set :views, VIEWS_FOLDER # set up the views dir
 
@@ -24,24 +21,6 @@ module Centralbank
   set connections: []
 
 
-    #########
-    ## return network node (built and configured on first use)
-    ##   fix: do NOT use @@ - use a class level method or something
-    def node
-      if defined?( @@node )
-        @@node
-      else
-        puts "[debug] centralbank - build (network) node (address: #{Centralbank.config.address})"
-        @@node = Node.new( address: Centralbank.config.address )
-        @@node
-      end
-      ####
-      ## check why this is a syntax error:
-      ## @node ||= do
-      ##   puts "[debug] centralbank - build (network) node (address: #{Centralbank.config.address})"
-      ##   @node = Node.new( address: Centralbank.config.address )
-      ## end
-    end
 
   get '/style.css' do
     scss :style    ## note: converts (pre-processes) style.scss to style.css
@@ -107,7 +86,27 @@ module Centralbank
       out.callback { settings.connections.delete(out) }
     end
   end
-  
+
+private
+
+#########
+## return network node (built and configured on first use)
+##   fix: do NOT use @@ - use a class level method or something
+def node
+  if defined?( @@node )
+    @@node
+  else
+    puts "[debug] centralbank - build (network) node (address: #{Centralbank.config.address})"
+    @@node = Node.new( address: Centralbank.config.address )
+    @@node
+  end
+  ####
+  ## check why this is a syntax error:
+  ## @node ||= do
+  ##   puts "[debug] centralbank - build (network) node (address: #{Centralbank.config.address})"
+  ##   @node = Node.new( address: Centralbank.config.address )
+  ## end
+end
 
   end # class Service
 

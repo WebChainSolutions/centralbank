@@ -49,15 +49,31 @@ module Centralbank
      attr_accessor :coinbase
      attr_accessor :mining_reward
 
+     ## note: add a (†) coinbase  marker
+     COINBASE = ['Everest†', 'Aconcagua†', 'Denali†',
+                 'Kilimanjaro†', 'Elbrus†', 'Vinson†',
+                 'Puncak Jaya†', 'Kosciuszko†',
+                 'Mont Blanc†'
+                ]
+
 
      def initialize
        ## try default setup via ENV variables
        ## pick "random" address if nil (none passed in)
-       @address = ENV[ 'CENTRALBANK_NAME'] || WALLET_ADDRESSES[rand( WALLET_ADDRESSES.size )]
+       @address = ENV[ 'CENTRALBANK_NAME'] || rand_address()
 
-       @coinbase      = 'COINBASE'   ## use a different name - why? why not?
+       @coinbase = COINBASE         ## use a different name - why? why not?
+                                    ##  note: for now is an array (multiple coinbases)
        @mining_reward = 5
      end
+
+     def rand_address()      WALLET_ADDRESSES[rand( WALLET_ADDRESSES.size )];  end
+     def rand_coinbase()     @coinbase[rand( @coinbase.size )];  end
+
+     def coinbase?( address )    ## check/todo: use wallet - why? why not? (for now wallet==address)
+       @coinbase.include?( address )
+     end
+
   end # class Configuration
 
 

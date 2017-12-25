@@ -23,7 +23,7 @@
                 $<%= tx.amount %>
               </td>
               <td>
-                <%= tx.from[0..7] %> → <%= tx.to[0..7] %>
+                <%= tx.from[0..15] %> → <%= tx.to[0..15] %>
               </td>
             </tr>
           <% end %>
@@ -31,4 +31,7 @@
       </div>
     <% end %>
   </div>
+  <p>
+    †: Miner Transaction - New $$ on the Market!
+  </p>
 </div>
