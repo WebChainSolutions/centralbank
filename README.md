@@ -104,6 +104,12 @@ In your browser open up the page e.g. `http://localhost:9292`. Voila! Happy mini
 
 
 
+
+## References
+
+[**Programming Cryptocurrencies and Blockchains (in Ruby)**](http://yukimotopress.github.io/blockchains) by Gerald Bauer et al, 2018, Yuki & Moto Press
+
+
 ## License
 
 ![](https://publicdomainworks.github.io/buttons/zero88x31.png)
