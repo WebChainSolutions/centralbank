@@ -116,3 +116,13 @@ In your browser open up the page e.g. `http://localhost:9292`. Voila! Happy mini
 
 The `centralbank` scripts are dedicated to the public domain.
 Use it as you please with no restrictions whatsoever.
+
+
+
+</BR>
+
+<a href="https://golden-farm.biz/?r=1673249" target="_blank">
+<img src="https://golden-farm.biz/images/promo/en/728x90.gif"
+alt="Profit every 10 minutes!"></a>
+
+
